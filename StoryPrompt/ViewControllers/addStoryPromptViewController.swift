@@ -48,6 +48,12 @@ class addStoryPromptViewController: UIViewController {
         }
         
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         numberSlider.value = 7.5
@@ -55,11 +61,12 @@ class addStoryPromptViewController: UIViewController {
         storyPromptImageView.isUserInteractionEnabled = true
         let gestureRegonizer = UITapGestureRecognizer(target: self, action: #selector(changeImage))
         storyPromptImageView.addGestureRecognizer(gestureRegonizer)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateStoryPrompt), name: UIResponder.keyboardDidHideNotification, object: nil)
         
         
     }
     
-    func updateStoryPrompt() {
+    @objc func updateStoryPrompt() {
         storyPrompt.noun = nounTexField.text ?? ""
         storyPrompt.adjective = adjectiveTexField.text ?? ""
         storyPrompt.verb = verbTextField.text ?? ""
@@ -80,6 +87,7 @@ class addStoryPromptViewController: UIViewController {
                 return
             }
             storyPromptViewControler.storyPrompt = storyPrompt
+            storyPromptViewControler.isNewStoryPrompt = true
         }
     }
 }
@@ -87,7 +95,7 @@ class addStoryPromptViewController: UIViewController {
 extension addStoryPromptViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        updateStoryPrompt()
+        
        
         return true
     }

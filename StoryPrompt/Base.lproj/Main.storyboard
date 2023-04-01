@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Story Prompt Table View Controller-->
         <scene sceneID="LFm-yT-Qh5">
             <objects>
-                <tableViewController id="rI2-o3-ncg" sceneMemberID="viewController">
+                <tableViewController id="rI2-o3-ncg" customClass="StoryPromptTableViewController" customModule="StoryPrompt" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="TIe-NH-avI">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,10 +41,20 @@
                             <outlet property="delegate" destination="rI2-o3-ncg" id="s9e-Lw-hlb"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="rpu-Tb-fP7">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="P9g-A3-Ehm">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="RrT-op-NiR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="0FO-AJ-6rZ" kind="show" identifier="ShowStoryPrompt" id="KSc-VQ-2T1"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IVU-09-TFK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1460" y="-35"/>
+            <point key="canvasLocation" x="-663" y="754"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="s1e-hz-sRg">
@@ -55,7 +65,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="khP-iA-n8J"/>
+                        <segue destination="rI2-o3-ncg" kind="relationship" relationship="rootViewController" id="hdd-vw-Ss0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Mw-da-04A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -245,13 +255,19 @@
                     <navigationItem key="navigationItem" id="QJI-8E-23q"/>
                     <connections>
                         <outlet property="storyPromptTextView" destination="HgT-Nj-cQt" id="gS9-Fi-MDu"/>
+                        <segue destination="8eG-JK-8fX" kind="unwind" identifier="CancelStoryPrompt" unwindAction="cancelStoryPromptWithUnwindSegue:" id="F9X-cN-Yda"/>
+                        <segue destination="8eG-JK-8fX" kind="unwind" identifier="SaveStoryPrompt" unwindAction="saveStoryPromptWithUnwindSegue:" id="o7a-wg-JMm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXw-o7-znR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="8eG-JK-8fX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="887.78625954198469" y="-35.211267605633807"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ESE-pe-tuf"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="10.circle" catalog="system" width="128" height="123"/>
         <image name="5.circle" catalog="system" width="128" height="123"/>
